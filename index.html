@@ -48,7 +48,7 @@
             background: white;
             padding: 30px;
             border-radius: 0 0 15px 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
         }
 
         .info {
@@ -81,7 +81,7 @@
         select:focus {
             outline: none;
             border-color: #1f4e78;
-            box-shadow: 0 0 4px rgba(31,78,120,0.3);
+            box-shadow: 0 0 4px rgba(31, 78, 120, 0.3);
         }
 
         button {
@@ -113,6 +113,7 @@
             border-radius: 7px;
             font-weight: bold;
             line-height: 1.5;
+            white-space: pre-line;
         }
 
         .success {
@@ -144,6 +145,7 @@
         }
 
         @media (max-width: 600px) {
+
             .container {
                 width: 94%;
                 margin: 20px auto;
@@ -160,6 +162,7 @@
             .card {
                 padding: 20px;
             }
+
         }
     </style>
 </head>
@@ -169,27 +172,40 @@
 <div class="container">
 
     <div class="header">
+
         <h1>Computational Mathematics Lab</h1>
+
         <p>
             Topic Selection & Allocation
         </p>
+
         <p>
             R25-CMRTC B.Tech CSE (AI&ML) III Semester
         </p>
+
         <p>
             Subject Code: 25MA306BS
         </p>
+
     </div>
+
 
     <div class="card">
 
         <div class="info">
+
             <strong>Important:</strong><br>
+
             • Each Roll No can select only <strong>ONE</strong> topic.<br>
+
             • Each topic can be selected by only <strong>ONE</strong> student.<br>
-            • Once submitted, the topic cannot be changed.<br>
+
+            • Once successfully submitted, the topic cannot be changed.<br>
+
             • If a topic is already selected, the Roll No of the student who selected it will be displayed.
+
         </div>
+
 
         <form id="topicForm">
 
@@ -205,6 +221,7 @@
                 autocomplete="off"
             >
 
+
             <label for="topic">
                 Select Topic
             </label>
@@ -215,7 +232,10 @@
                     -- Select a Topic --
                 </option>
 
+
+                <!-- ================================================= -->
                 <!-- UNIT I -->
+                <!-- ================================================= -->
 
                 <optgroup label="UNIT I — Eigenvalues and Eigenvectors">
 
@@ -302,7 +322,9 @@
                 </optgroup>
 
 
+                <!-- ================================================= -->
                 <!-- UNIT II -->
+                <!-- ================================================= -->
 
                 <optgroup label="UNIT II — Algebraic and Transcendental Equations">
 
@@ -389,7 +411,9 @@
                 </optgroup>
 
 
+                <!-- ================================================= -->
                 <!-- UNIT III -->
+                <!-- ================================================= -->
 
                 <optgroup label="UNIT III — Linear System of Equations">
 
@@ -476,7 +500,9 @@
                 </optgroup>
 
 
+                <!-- ================================================= -->
                 <!-- UNIT IV -->
+                <!-- ================================================= -->
 
                 <optgroup label="UNIT IV — First-Order ODEs">
 
@@ -563,7 +589,9 @@
                 </optgroup>
 
 
+                <!-- ================================================= -->
                 <!-- UNIT V -->
+                <!-- ================================================= -->
 
                 <optgroup label="UNIT V — Higher-Order Linear Differential Equations with Constant Coefficients">
 
@@ -651,13 +679,16 @@
 
             </select>
 
+
             <button type="submit" id="submitBtn">
                 Submit Topic
             </button>
 
         </form>
 
+
         <div id="message" class="message"></div>
+
 
         <div class="footer">
             Computational Mathematics Lab | 25MA306BS
@@ -671,35 +702,64 @@
 <script>
 
     // ============================================================
-    // YOUR LATEST GOOGLE APPS SCRIPT WEB APP URL
+    // GOOGLE APPS SCRIPT WEB APP URL
     // ============================================================
 
     const SCRIPT_URL =
         "https://script.google.com/macros/s/AKfycbwcHdl9OWVzcdYUI_hPFi1FYgAIZ-rAQOSAB7UrwCgYtuYhZLujQ5rPNJGlLtMoWWf1oQ/exec";
 
 
-    const form = document.getElementById("topicForm");
-    const rollNoInput = document.getElementById("rollNo");
-    const topicSelect = document.getElementById("topic");
-    const submitBtn = document.getElementById("submitBtn");
-    const messageBox = document.getElementById("message");
+    // ============================================================
+    // ELEMENTS
+    // ============================================================
 
+    const form = document.getElementById("topicForm");
+
+    const rollNoInput =
+        document.getElementById("rollNo");
+
+    const topicSelect =
+        document.getElementById("topic");
+
+    const submitBtn =
+        document.getElementById("submitBtn");
+
+    const messageBox =
+        document.getElementById("message");
+
+
+    // ============================================================
+    // MESSAGE FUNCTION
+    // ============================================================
 
     function showMessage(text, type) {
 
         messageBox.className = "message " + type;
+
         messageBox.textContent = text;
 
     }
 
 
+    // ============================================================
+    // FORM SUBMISSION
+    // ============================================================
+
     form.addEventListener("submit", async function(event) {
 
         event.preventDefault();
 
-        const rollNo = rollNoInput.value.trim();
-        const topic = topicSelect.value.trim();
 
+        const rollNo =
+            rollNoInput.value.trim();
+
+        const topic =
+            topicSelect.value.trim();
+
+
+        // --------------------------------------------------------
+        // VALIDATE ROLL NO
+        // --------------------------------------------------------
 
         if (rollNo === "") {
 
@@ -712,6 +772,10 @@
         }
 
 
+        // --------------------------------------------------------
+        // VALIDATE TOPIC
+        // --------------------------------------------------------
+
         if (topic === "") {
 
             showMessage(
@@ -723,8 +787,14 @@
         }
 
 
+        // --------------------------------------------------------
+        // DISABLE BUTTON WHILE SUBMITTING
+        // --------------------------------------------------------
+
         submitBtn.disabled = true;
-        submitBtn.textContent = "Submitting...";
+
+        submitBtn.textContent =
+            "Submitting...";
 
 
         showMessage(
@@ -732,6 +802,10 @@
             "loading"
         );
 
+
+        // --------------------------------------------------------
+        // SEND DATA TO GOOGLE APPS SCRIPT
+        // --------------------------------------------------------
 
         try {
 
@@ -741,98 +815,129 @@
                     method: "POST",
 
                     headers: {
-                        "Content-Type": "text/plain;charset=utf-8"
+                        "Content-Type":
+                            "text/plain;charset=utf-8"
                     },
 
                     body: JSON.stringify({
+
                         rollNo: rollNo,
+
                         topic: topic
+
                     })
                 }
             );
 
 
-            const result = await response.json();
+            const result =
+                await response.json();
 
+
+            // ----------------------------------------------------
+            // SUCCESS
+            // ----------------------------------------------------
 
             if (result.success) {
 
                 showMessage(
+
                     "Success! Your topic has been allocated successfully.\n\n" +
-                    "Roll No: " + rollNo + "\n" +
-                    "Topic: " + topic,
+
+                    "Roll No: " +
+                    rollNo +
+                    "\n" +
+
+                    "Topic: " +
+                    topic,
+
                     "success"
+
                 );
 
 
                 /*
-                 * Prevent the same browser from submitting again.
-                 * The Google Sheet remains the actual source of truth.
+                 * Disable only after SUCCESSFUL submission.
+                 *
+                 * There is NO localStorage.
+                 *
+                 * Therefore:
+                 *
+                 * Student A submits on this browser.
+                 * Student B can reload the page and submit.
+                 *
+                 * The Google Sheet / Apps Script controls
+                 * duplicate Roll No and duplicate topics.
                  */
 
-                localStorage.setItem(
-                    "topicSubmitted",
-                    "true"
-                );
-
-
                 rollNoInput.disabled = true;
+
                 topicSelect.disabled = true;
+
                 submitBtn.disabled = true;
-                submitBtn.textContent = "Topic Allocated";
+
+                submitBtn.textContent =
+                    "Topic Allocated";
 
             }
+
+
+            // ----------------------------------------------------
+            // ERROR FROM GOOGLE APPS SCRIPT
+            // ----------------------------------------------------
 
             else {
 
                 showMessage(
+
                     result.message ||
                     "Unable to submit your topic.",
+
                     "error"
+
                 );
 
+
+                // Allow the user to try again
+                // if the submission was rejected.
+
                 submitBtn.disabled = false;
-                submitBtn.textContent = "Submit Topic";
+
+                submitBtn.textContent =
+                    "Submit Topic";
 
             }
 
         }
+
+
+        // --------------------------------------------------------
+        // CONNECTION ERROR
+        // --------------------------------------------------------
 
         catch (error) {
 
             console.error(error);
 
+
             showMessage(
-                "Unable to connect to the server. Please check your internet connection and try again.",
+
+                "Unable to connect to the server. " +
+                "Please check your internet connection and try again.",
+
                 "error"
+
             );
 
+
             submitBtn.disabled = false;
-            submitBtn.textContent = "Submit Topic";
+
+            submitBtn.textContent =
+                "Submit Topic";
 
         }
 
     });
-
-
-    /*
-     * If this browser already submitted a topic,
-     * don't allow another submission from this browser.
-     */
-
-    if (localStorage.getItem("topicSubmitted") === "true") {
-
-        rollNoInput.disabled = true;
-        topicSelect.disabled = true;
-        submitBtn.disabled = true;
-
-        showMessage(
-            "This browser has already submitted a topic. " +
-            "If you need to check your allocation, contact the coordinator.",
-            "error"
-        );
-
-    }
 
 </script>
 
