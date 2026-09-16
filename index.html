@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Project Topic Allocation</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f3f6fb;
+        }
+
+        .container {
+            width: 420px;
+            background: white;
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        h1 {
+            text-align: center;
+            color: #222;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 7px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #2563eb;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 22px;
+            padding: 13px;
+            border: none;
+            border-radius: 7px;
+            background: #2563eb;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        button:disabled {
+            background: #999;
+            cursor: not-allowed;
+        }
+
+        #message {
+            margin-top: 18px;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+            border-radius: 6px;
+        }
+
+        .success {
+            color: #166534;
+            background: #dcfce7;
+        }
+
+        .error {
+            color: #991b1b;
+            background: #fee2e2;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+    <h1>Topic Allocation</h1>
+
+    <p class="subtitle">
+        Enter your Roll Number and Project Topic
+    </p>
+
+
+    <form id="topicForm">
+
+        <label for="rollNo">
+            Roll Number
+        </label>
+
+        <input
+            type="text"
+            id="rollNo"
+            placeholder="Enter Roll Number"
+            required
+        >
+
+
+        <label for="topic">
+            Project Topic
+        </label>
+
+        <input
+            type="text"
+            id="topic"
+            placeholder="Enter Project Topic"
+            required
+        >
+
+
+        <button type="submit" id="submitButton">
+            Check & Submit
+        </button>
+
+    </form>
+
+
+    <div id="message"></div>
+
+</div>
+
+
+<script>
+
+const API_URL =
+"https://script.google.com/macros/s/AKfycbyjKK2Op3gwSH5bbvVoQDocqqAUPh1arm_qBgf04AUfHHihHE64hHUYJzb-v4oT43tu/exec";
+
+
+document.getElementById("topicForm").addEventListener(
+    "submit",
+    async function(event) {
+
+        event.preventDefault();
+
+
+        const rollNo =
+            document.getElementById("rollNo").value.trim();
+
+        const topic =
+            document.getElementById("topic").value.trim();
+
+        const message =
+            document.getElementById("message");
+
+        const button =
+            document.getElementById("submitButton");
+
+
+        if (rollNo === "" || topic === "") {
+
+            message.className = "error";
+
+            message.innerText =
+                "Please enter Roll Number and Topic.";
+
+            return;
+        }
+
+
+        button.disabled = true;
+
+        button.innerText = "Checking...";
+
+        message.className = "";
+
+        message.innerText = "";
+
+
+        try {
+
+            const response = await fetch(API_URL, {
+
+                method: "POST",
+
+                body: JSON.stringify({
+
+                    rollNo: rollNo,
+
+                    topic: topic
+
+                })
+
+            });
+
+
+            const result =
+                await response.json();
+
+
+            if (result.success) {
+
+                message.className = "success";
+
+                message.innerText =
+                    "✓ " + result.message;
+
+
+                document.getElementById("rollNo").value = "";
+
+                document.getElementById("topic").value = "";
+
+            }
+
+            else {
+
+                message.className = "error";
+
+                message.innerText =
+                    "✗ " + result.message;
+
+            }
+
+        }
+
+        catch (error) {
+
+            message.className = "error";
+
+            message.innerText =
+                "Unable to connect to the server.";
+
+        }
+
+
+        button.disabled = false;
+
+        button.innerText = "Check & Submit";
+
+    }
+
+);
+
+</script>
+
+</body>
+
+</html>
