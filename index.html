@@ -9,97 +9,96 @@
     <style>
         * {
             box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
-            margin: 0;
-            padding: 25px;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             font-family: Arial, sans-serif;
-            background: #f3f6fb;
+            background: #f4f7fb;
+            color: #222;
+            min-height: 100vh;
         }
 
         .container {
-            width: 620px;
-            max-width: 100%;
+            width: 95%;
+            max-width: 900px;
+            margin: 40px auto;
+        }
+
+        .header {
+            background: #1f4e78;
+            color: white;
+            padding: 30px;
+            border-radius: 15px 15px 0 0;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .card {
             background: white;
-            padding: 32px;
-            border-radius: 14px;
-            box-shadow: 0 8px 28px rgba(0,0,0,0.12);
+            padding: 30px;
+            border-radius: 0 0 15px 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
         }
 
-        h1 {
-            text-align: center;
-            color: #222;
-            margin-bottom: 8px;
-            font-size: 26px;
-        }
-
-        .subtitle {
-            text-align: center;
-            color: #666;
-            font-size: 14px;
-            margin-bottom: 24px;
-            line-height: 1.5;
-        }
-
-        .rule {
-            background: #eef4ff;
-            border-left: 4px solid #2563eb;
-            padding: 12px 14px;
-            margin-bottom: 22px;
-            border-radius: 6px;
-            font-size: 13px;
-            color: #333;
-            line-height: 1.5;
+        .info {
+            background: #eef6ff;
+            border-left: 5px solid #1f4e78;
+            padding: 15px;
+            margin-bottom: 25px;
+            border-radius: 5px;
+            line-height: 1.6;
         }
 
         label {
             display: block;
-            margin-top: 16px;
-            margin-bottom: 7px;
             font-weight: bold;
-            color: #333;
+            margin-bottom: 8px;
+            margin-top: 20px;
         }
 
         input,
         select {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #ccc;
+            padding: 13px;
+            border: 1px solid #bbb;
             border-radius: 7px;
-            font-size: 14px;
-            outline: none;
+            font-size: 15px;
             background: white;
         }
 
         input:focus,
         select:focus {
-            border-color: #2563eb;
-        }
-
-        select {
-            cursor: pointer;
+            outline: none;
+            border-color: #1f4e78;
+            box-shadow: 0 0 4px rgba(31,78,120,0.3);
         }
 
         button {
             width: 100%;
-            margin-top: 22px;
-            padding: 13px;
-            border: 0;
-            border-radius: 7px;
-            background: #2563eb;
+            margin-top: 25px;
+            padding: 14px;
+            background: #1f4e78;
             color: white;
+            border: none;
+            border-radius: 7px;
             font-size: 16px;
             font-weight: bold;
             cursor: pointer;
         }
 
         button:hover {
-            background: #1d4ed8;
+            background: #163a5c;
         }
 
         button:disabled {
@@ -107,33 +106,60 @@
             cursor: not-allowed;
         }
 
-        #message {
+        .message {
             display: none;
-            margin-top: 18px;
-            padding: 12px;
-            text-align: center;
-            font-weight: bold;
+            margin-top: 20px;
+            padding: 15px;
             border-radius: 7px;
-            line-height: 1.4;
+            font-weight: bold;
+            line-height: 1.5;
         }
 
         .success {
-            display: block !important;
-            color: #166534;
-            background: #dcfce7;
+            display: block;
+            background: #e7f7ed;
+            color: #176b36;
+            border: 1px solid #9ad5ae;
         }
 
         .error {
-            display: block !important;
-            color: #991b1b;
-            background: #fee2e2;
+            display: block;
+            background: #fdeaea;
+            color: #a11b1b;
+            border: 1px solid #e3a1a1;
         }
 
-        .count {
-            margin-top: 8px;
-            text-align: right;
-            color: #777;
-            font-size: 12px;
+        .loading {
+            display: block;
+            background: #fff6df;
+            color: #8a6500;
+            border: 1px solid #e5cc82;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+            font-size: 13px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                width: 94%;
+                margin: 20px auto;
+            }
+
+            .header {
+                padding: 22px 15px;
+            }
+
+            .header h1 {
+                font-size: 21px;
+            }
+
+            .card {
+                padding: 20px;
+            }
         }
     </style>
 </head>
@@ -142,500 +168,529 @@
 
 <div class="container">
 
-    <h1>Computational Mathematics Lab</h1>
-
-    <p class="subtitle">
-        Project Topic Allocation<br>
-        Select one topic from the approved syllabus list.
-    </p>
-
-    <div class="rule">
-        <b>Important:</b><br>
-        Each student can submit only once.<br>
-        Each topic can be allocated to only one student.
+    <div class="header">
+        <h1>Computational Mathematics Lab</h1>
+        <p>
+            Topic Selection & Allocation
+        </p>
+        <p>
+            R25-CMRTC B.Tech CSE (AI&ML) III Semester
+        </p>
+        <p>
+            Subject Code: 25MA306BS
+        </p>
     </div>
 
-    <form id="topicForm">
-
-        <label for="rollNo">Roll Number</label>
-
-        <input
-            type="text"
-            id="rollNo"
-            placeholder="Enter your Roll Number"
-            autocomplete="off"
-            required
-        >
-
-        <label for="topic">Select Project Topic</label>
-
-        <select id="topic" required>
-
-            <option value="">-- Select an approved topic --</option>
-
-            <!-- UNIT I -->
-
-            <optgroup label="UNIT I — Eigenvalues and Eigenvectors">
-
-                <option value="Computation of Real Eigenvalues of a Square Matrix Using Python">
-                    1. Computation of Real Eigenvalues of a Square Matrix Using Python
-                </option>
-
-                <option value="Computation of Complex Eigenvalues of a Square Matrix Using Python">
-                    2. Computation of Complex Eigenvalues of a Square Matrix Using Python
-                </option>
-
-                <option value="Finding Eigenvectors Corresponding to Real Eigenvalues">
-                    3. Finding Eigenvectors Corresponding to Real Eigenvalues
-                </option>
-
-                <option value="Finding Eigenvectors Corresponding to Complex Eigenvalues">
-                    4. Finding Eigenvectors Corresponding to Complex Eigenvalues
-                </option>
-
-                <option value="Complete Eigenvalue and Eigenvector Analysis of a 2×2 Matrix">
-                    5. Complete Eigenvalue and Eigenvector Analysis of a 2×2 Matrix
-                </option>
-
-                <option value="Complete Eigenvalue and Eigenvector Analysis of a 3×3 Matrix">
-                    6. Complete Eigenvalue and Eigenvector Analysis of a 3×3 Matrix
-                </option>
-
-                <option value="Numerical Computation of Eigenvalues and Eigenvectors Using MATLAB">
-                    7. Numerical Computation of Eigenvalues and Eigenvectors Using MATLAB
-                </option>
-
-                <option value="Numerical Computation of Eigenvalues and Eigenvectors Using Python">
-                    8. Numerical Computation of Eigenvalues and Eigenvectors Using Python
-                </option>
-
-                <option value="Comparison of Real and Complex Eigenvalues of Different Matrices">
-                    9. Comparison of Real and Complex Eigenvalues of Different Matrices
-                </option>
-
-                <option value="Eigenvalue Analysis of a Symmetric Matrix">
-                    10. Eigenvalue Analysis of a Symmetric Matrix
-                </option>
-
-                <option value="Eigenvalue Analysis of a Non-Symmetric Matrix">
-                    11. Eigenvalue Analysis of a Non-Symmetric Matrix
-                </option>
-
-                <option value="Graphical Visualization of Eigenvalues of a Matrix">
-                    12. Graphical Visualization of Eigenvalues of a Matrix
-                </option>
-
-                <option value="Graphical Visualization of Eigenvectors of a Matrix">
-                    13. Graphical Visualization of Eigenvectors of a Matrix
-                </option>
-
-                <option value="Numerical Verification of Eigenvalue and Eigenvector Relationships">
-                    14. Numerical Verification of Eigenvalue and Eigenvector Relationships
-                </option>
-
-                <option value="Eigenvalue and Eigenvector Analysis for Multiple Square Matrices">
-                    15. Eigenvalue and Eigenvector Analysis for Multiple Square Matrices
-                </option>
-
-                <option value="Comparison of Eigenvalues Obtained Using Python and MATLAB">
-                    16. Comparison of Eigenvalues Obtained Using Python and MATLAB
-                </option>
-
-                <option value="Study of Eigenvalues for Matrices with Distinct Eigenvalues">
-                    17. Study of Eigenvalues for Matrices with Distinct Eigenvalues
-                </option>
-
-                <option value="Study of Eigenvalues for Matrices with Repeated Eigenvalues">
-                    18. Study of Eigenvalues for Matrices with Repeated Eigenvalues
-                </option>
-
-                <option value="Study of Complex Eigenvalues and Their Numerical Representation">
-                    19. Study of Complex Eigenvalues and Their Numerical Representation
-                </option>
-
-                <option value="Computational Analysis and Visualization of Eigenvalues and Eigenvectors">
-                    20. Computational Analysis and Visualization of Eigenvalues and Eigenvectors
-                </option>
-
-            </optgroup>
-
-
-            <!-- UNIT II -->
-
-            <optgroup label="UNIT II — Algebraic and Transcendental Equations">
-
-                <option value="Finding the Root of an Algebraic Equation Using Bisection Method">
-                    21. Finding the Root of an Algebraic Equation Using Bisection Method
-                </option>
-
-                <option value="Finding the Root of a Transcendental Equation Using Bisection Method">
-                    22. Finding the Root of a Transcendental Equation Using Bisection Method
-                </option>
-
-                <option value="Finding the Root of an Algebraic Equation Using Newton-Raphson Method">
-                    23. Finding the Root of an Algebraic Equation Using Newton-Raphson Method
-                </option>
-
-                <option value="Finding the Root of a Transcendental Equation Using Newton-Raphson Method">
-                    24. Finding the Root of a Transcendental Equation Using Newton-Raphson Method
-                </option>
-
-                <option value="Comparison of Bisection and Newton-Raphson Methods">
-                    25. Comparison of Bisection and Newton-Raphson Methods
-                </option>
-
-                <option value="Root Finding for a Polynomial Equation Using Bisection Method">
-                    26. Root Finding for a Polynomial Equation Using Bisection Method
-                </option>
-
-                <option value="Root Finding for a Polynomial Equation Using Newton-Raphson Method">
-                    27. Root Finding for a Polynomial Equation Using Newton-Raphson Method
-                </option>
-
-                <option value="Root Finding for a Trigonometric Equation Using Bisection Method">
-                    28. Root Finding for a Trigonometric Equation Using Bisection Method
-                </option>
-
-                <option value="Root Finding for a Trigonometric Equation Using Newton-Raphson Method">
-                    29. Root Finding for a Trigonometric Equation Using Newton-Raphson Method
-                </option>
-
-                <option value="Root Finding for an Exponential Equation Using Bisection Method">
-                    30. Root Finding for an Exponential Equation Using Bisection Method
-                </option>
-
-                <option value="Root Finding for an Exponential Equation Using Newton-Raphson Method">
-                    31. Root Finding for an Exponential Equation Using Newton-Raphson Method
-                </option>
-
-                <option value="Root Finding for a Logarithmic Equation Using Bisection Method">
-                    32. Root Finding for a Logarithmic Equation Using Bisection Method
-                </option>
-
-                <option value="Root Finding for a Logarithmic Equation Using Newton-Raphson Method">
-                    33. Root Finding for a Logarithmic Equation Using Newton-Raphson Method
-                </option>
-
-                <option value="Graphical Identification of Roots Before Applying Bisection Method">
-                    34. Graphical Identification of Roots Before Applying Bisection Method
-                </option>
-
-                <option value="Graphical Identification of Roots Before Applying Newton-Raphson Method">
-                    35. Graphical Identification of Roots Before Applying Newton-Raphson Method
-                </option>
-
-                <option value="Convergence Analysis of the Bisection Method">
-                    36. Convergence Analysis of the Bisection Method
-                </option>
-
-                <option value="Convergence Analysis of the Newton-Raphson Method">
-                    37. Convergence Analysis of the Newton-Raphson Method
-                </option>
-
-                <option value="Iteration-Based Error Analysis in the Bisection Method">
-                    38. Iteration-Based Error Analysis in the Bisection Method
-                </option>
-
-                <option value="Iteration-Based Error Analysis in the Newton-Raphson Method">
-                    39. Iteration-Based Error Analysis in the Newton-Raphson Method
-                </option>
-
-                <option value="Graphical and Numerical Analysis of Algebraic and Transcendental Equation Roots">
-                    40. Graphical and Numerical Analysis of Algebraic and Transcendental Equation Roots
-                </option>
-
-            </optgroup>
-
-
-            <!-- UNIT III -->
-
-            <optgroup label="UNIT III — Linear System of Equations">
-
-                <option value="Solving a 2×2 Linear System Using Jacobi's Iteration Method">
-                    41. Solving a 2×2 Linear System Using Jacobi's Iteration Method
-                </option>
-
-                <option value="Solving a 3×3 Linear System Using Jacobi's Iteration Method">
-                    42. Solving a 3×3 Linear System Using Jacobi's Iteration Method
-                </option>
-
-                <option value="Solving a 4×4 Linear System Using Jacobi's Iteration Method">
-                    43. Solving a 4×4 Linear System Using Jacobi's Iteration Method
-                </option>
-
-                <option value="Solving a 2×2 Linear System Using Gauss-Seidel Method">
-                    44. Solving a 2×2 Linear System Using Gauss-Seidel Method
-                </option>
-
-                <option value="Solving a 3×3 Linear System Using Gauss-Seidel Method">
-                    45. Solving a 3×3 Linear System Using Gauss-Seidel Method
-                </option>
-
-                <option value="Solving a 4×4 Linear System Using Gauss-Seidel Method">
-                    46. Solving a 4×4 Linear System Using Gauss-Seidel Method
-                </option>
-
-                <option value="Comparison of Jacobi and Gauss-Seidel Iteration Methods">
-                    47. Comparison of Jacobi and Gauss-Seidel Iteration Methods
-                </option>
-
-                <option value="Convergence Analysis of Jacobi's Iteration Method">
-                    48. Convergence Analysis of Jacobi's Iteration Method
-                </option>
-
-                <option value="Convergence Analysis of Gauss-Seidel Method">
-                    49. Convergence Analysis of Gauss-Seidel Method
-                </option>
-
-                <option value="Iteration Error Analysis Using Jacobi's Method">
-                    50. Iteration Error Analysis Using Jacobi's Method
-                </option>
-
-                <option value="Iteration Error Analysis Using Gauss-Seidel Method">
-                    51. Iteration Error Analysis Using Gauss-Seidel Method
-                </option>
-
-                <option value="Graphical Visualization of Jacobi Method Convergence">
-                    52. Graphical Visualization of Jacobi Method Convergence
-                </option>
-
-                <option value="Graphical Visualization of Gauss-Seidel Method Convergence">
-                    53. Graphical Visualization of Gauss-Seidel Method Convergence
-                </option>
-
-                <option value="Comparison of Iterations Required by Jacobi and Gauss-Seidel Methods">
-                    54. Comparison of Iterations Required by Jacobi and Gauss-Seidel Methods
-                </option>
-
-                <option value="Accuracy Analysis of Jacobi's Iterative Solution">
-                    55. Accuracy Analysis of Jacobi's Iterative Solution
-                </option>
-
-                <option value="Accuracy Analysis of Gauss-Seidel's Iterative Solution">
-                    56. Accuracy Analysis of Gauss-Seidel's Iterative Solution
-                </option>
-
-                <option value="Solution of Simultaneous Linear Equations Using Jacobi's Method in Python">
-                    57. Solution of Simultaneous Linear Equations Using Jacobi's Method in Python
-                </option>
-
-                <option value="Solution of Simultaneous Linear Equations Using Gauss-Seidel Method in Python">
-                    58. Solution of Simultaneous Linear Equations Using Gauss-Seidel Method in Python
-                </option>
-
-                <option value="Solution of Simultaneous Linear Equations Using Jacobi and Gauss-Seidel in MATLAB">
-                    59. Solution of Simultaneous Linear Equations Using Jacobi and Gauss-Seidel in MATLAB
-                </option>
-
-                <option value="Computational and Graphical Analysis of Iterative Methods for Linear Systems">
-                    60. Computational and Graphical Analysis of Iterative Methods for Linear Systems
-                </option>
-
-            </optgroup>
-
-
-            <!-- UNIT IV -->
-
-            <optgroup label="UNIT IV — First-Order ODEs">
-
-                <option value="Solution of a First-Order Exact Differential Equation">
-                    61. Solution of a First-Order Exact Differential Equation
-                </option>
-
-                <option value="Verification of a First-Order Exact Differential Equation">
-                    62. Verification of a First-Order Exact Differential Equation
-                </option>
-
-                <option value="Graphical Solution of a First-Order Exact Differential Equation">
-                    63. Graphical Solution of a First-Order Exact Differential Equation
-                </option>
-
-                <option value="Computational Analysis of Exact Differential Equations">
-                    64. Computational Analysis of Exact Differential Equations
-                </option>
-
-                <option value="Solution of a First-Order Non-Exact Differential Equation">
-                    65. Solution of a First-Order Non-Exact Differential Equation
-                </option>
-
-                <option value="Verification of a First-Order Non-Exact Differential Equation">
-                    66. Verification of a First-Order Non-Exact Differential Equation
-                </option>
-
-                <option value="Graphical Solution of a First-Order Non-Exact Differential Equation">
-                    67. Graphical Solution of a First-Order Non-Exact Differential Equation
-                </option>
-
-                <option value="Computational Analysis of Non-Exact Differential Equations">
-                    68. Computational Analysis of Non-Exact Differential Equations
-                </option>
-
-                <option value="Comparison of Exact and Non-Exact First-Order Differential Equations">
-                    69. Comparison of Exact and Non-Exact First-Order Differential Equations
-                </option>
-
-                <option value="Solution and Visualization of First-Order Exact Differential Equations">
-                    70. Solution and Visualization of First-Order Exact Differential Equations
-                </option>
-
-                <option value="Modeling Exponential Growth Using a First-Order Differential Equation">
-                    71. Modeling Exponential Growth Using a First-Order Differential Equation
-                </option>
-
-                <option value="Modeling Exponential Decay Using a First-Order Differential Equation">
-                    72. Modeling Exponential Decay Using a First-Order Differential Equation
-                </option>
-
-                <option value="Graphical Analysis of Exponential Growth">
-                    73. Graphical Analysis of Exponential Growth
-                </option>
-
-                <option value="Graphical Analysis of Exponential Decay">
-                    74. Graphical Analysis of Exponential Decay
-                </option>
-
-                <option value="Comparison of Exponential Growth and Exponential Decay Models">
-                    75. Comparison of Exponential Growth and Exponential Decay Models
-                </option>
-
-                <option value="Computational Solution of Exponential Growth Problems">
-                    76. Computational Solution of Exponential Growth Problems
-                </option>
-
-                <option value="Computational Solution of Exponential Decay Problems">
-                    77. Computational Solution of Exponential Decay Problems
-                </option>
-
-                <option value="Effect of Initial Conditions on Exponential Growth and Decay">
-                    78. Effect of Initial Conditions on Exponential Growth and Decay
-                </option>
-
-                <option value="Simulation of Exponential Growth and Decay Using Python/MATLAB">
-                    79. Simulation of Exponential Growth and Decay Using Python/MATLAB
-                </option>
-
-                <option value="Newton's Law of Cooling: Mathematical Modeling and Computational Solution">
-                    80. Newton's Law of Cooling: Mathematical Modeling and Computational Solution
-                </option>
-
-            </optgroup>
-
-
-            <!-- UNIT V -->
-
-            <optgroup label="UNIT V — Higher-Order Linear Differential Equations">
-
-                <option value="Solution of a Second-Order Homogeneous Linear ODE">
-                    81. Solution of a Second-Order Homogeneous Linear ODE
-                </option>
-
-                <option value="Solution of a Third-Order Homogeneous Linear ODE">
-                    82. Solution of a Third-Order Homogeneous Linear ODE
-                </option>
-
-                <option value="Solution of a Higher-Order Homogeneous Linear ODE">
-                    83. Solution of a Higher-Order Homogeneous Linear ODE
-                </option>
-
-                <option value="Homogeneous ODE with Distinct Real Characteristic Roots">
-                    84. Homogeneous ODE with Distinct Real Characteristic Roots
-                </option>
-
-                <option value="Homogeneous ODE with Repeated Characteristic Roots">
-                    85. Homogeneous ODE with Repeated Characteristic Roots
-                </option>
-
-                <option value="Homogeneous ODE with Complex Characteristic Roots">
-                    86. Homogeneous ODE with Complex Characteristic Roots
-                </option>
-
-                <option value="Computational Solution of Homogeneous ODEs Using Python">
-                    87. Computational Solution of Homogeneous ODEs Using Python
-                </option>
-
-                <option value="Computational Solution of Homogeneous ODEs Using MATLAB">
-                    88. Computational Solution of Homogeneous ODEs Using MATLAB
-                </option>
-
-                <option value="Graphical Visualization of Homogeneous ODE Solutions">
-                    89. Graphical Visualization of Homogeneous ODE Solutions
-                </option>
-
-                <option value="Comparison of Homogeneous ODE Solutions for Different Characteristic Roots">
-                    90. Comparison of Homogeneous ODE Solutions for Different Characteristic Roots
-                </option>
-
-                <option value="Solution of a Second-Order Non-Homogeneous Linear ODE">
-                    91. Solution of a Second-Order Non-Homogeneous Linear ODE
-                </option>
-
-                <option value="Solution of a Third-Order Non-Homogeneous Linear ODE">
-                    92. Solution of a Third-Order Non-Homogeneous Linear ODE
-                </option>
-
-                <option value="Solution of a Higher-Order Non-Homogeneous Linear ODE">
-                    93. Solution of a Higher-Order Non-Homogeneous Linear ODE
-                </option>
-
-                <option value="Computational Solution of Non-Homogeneous ODEs Using Python">
-                    94. Computational Solution of Non-Homogeneous ODEs Using Python
-                </option>
-
-                <option value="Computational Solution of Non-Homogeneous ODEs Using MATLAB">
-                    95. Computational Solution of Non-Homogeneous ODEs Using MATLAB
-                </option>
-
-                <option value="Graphical Visualization of Non-Homogeneous ODE Solutions">
-                    96. Graphical Visualization of Non-Homogeneous ODE Solutions
-                </option>
-
-                <option value="Comparison of Homogeneous and Non-Homogeneous ODE Solutions">
-                    97. Comparison of Homogeneous and Non-Homogeneous ODE Solutions
-                </option>
-
-                <option value="Analysis of Higher-Order Linear ODEs with Constant Coefficients">
-                    98. Analysis of Higher-Order Linear ODEs with Constant Coefficients
-                </option>
-
-                <option value="Numerical and Graphical Analysis of Higher-Order Linear ODE Solutions">
-                    99. Numerical and Graphical Analysis of Higher-Order Linear ODE Solutions
-                </option>
-
-                <option value="Computational Solver for Homogeneous and Non-Homogeneous Linear ODEs with Constant Coefficients">
-                    100. Computational Solver for Homogeneous and Non-Homogeneous Linear ODEs with Constant Coefficients
-                </option>
-
-            </optgroup>
-
-        </select>
-
-        <div class="count">
-            100 approved topics
+    <div class="card">
+
+        <div class="info">
+            <strong>Important:</strong><br>
+            • Each Roll No can select only <strong>ONE</strong> topic.<br>
+            • Each topic can be selected by only <strong>ONE</strong> student.<br>
+            • Once submitted, the topic cannot be changed.<br>
+            • If a topic is already selected, the Roll No of the student who selected it will be displayed.
         </div>
 
-        <button type="submit" id="submitButton">
-            Submit Topic
-        </button>
+        <form id="topicForm">
 
-    </form>
+            <label for="rollNo">
+                Roll No
+            </label>
 
-    <div id="message"></div>
+            <input
+                type="text"
+                id="rollNo"
+                placeholder="Enter your Roll No"
+                required
+                autocomplete="off"
+            >
+
+            <label for="topic">
+                Select Topic
+            </label>
+
+            <select id="topic" required>
+
+                <option value="">
+                    -- Select a Topic --
+                </option>
+
+                <!-- UNIT I -->
+
+                <optgroup label="UNIT I — Eigenvalues and Eigenvectors">
+
+                    <option value="1. Computation of Real Eigenvalues of a Square Matrix Using Python">
+                        1. Computation of Real Eigenvalues of a Square Matrix Using Python
+                    </option>
+
+                    <option value="2. Computation of Complex Eigenvalues of a Square Matrix Using Python">
+                        2. Computation of Complex Eigenvalues of a Square Matrix Using Python
+                    </option>
+
+                    <option value="3. Finding Eigenvectors Corresponding to Real Eigenvalues">
+                        3. Finding Eigenvectors Corresponding to Real Eigenvalues
+                    </option>
+
+                    <option value="4. Finding Eigenvectors Corresponding to Complex Eigenvalues">
+                        4. Finding Eigenvectors Corresponding to Complex Eigenvalues
+                    </option>
+
+                    <option value="5. Complete Eigenvalue and Eigenvector Analysis of a 2×2 Matrix">
+                        5. Complete Eigenvalue and Eigenvector Analysis of a 2×2 Matrix
+                    </option>
+
+                    <option value="6. Complete Eigenvalue and Eigenvector Analysis of a 3×3 Matrix">
+                        6. Complete Eigenvalue and Eigenvector Analysis of a 3×3 Matrix
+                    </option>
+
+                    <option value="7. Numerical Computation of Eigenvalues and Eigenvectors Using MATLAB">
+                        7. Numerical Computation of Eigenvalues and Eigenvectors Using MATLAB
+                    </option>
+
+                    <option value="8. Numerical Computation of Eigenvalues and Eigenvectors Using Python">
+                        8. Numerical Computation of Eigenvalues and Eigenvectors Using Python
+                    </option>
+
+                    <option value="9. Comparison of Real and Complex Eigenvalues of Different Matrices">
+                        9. Comparison of Real and Complex Eigenvalues of Different Matrices
+                    </option>
+
+                    <option value="10. Eigenvalue Analysis of a Symmetric Matrix">
+                        10. Eigenvalue Analysis of a Symmetric Matrix
+                    </option>
+
+                    <option value="11. Eigenvalue Analysis of a Non-Symmetric Matrix">
+                        11. Eigenvalue Analysis of a Non-Symmetric Matrix
+                    </option>
+
+                    <option value="12. Graphical Visualization of Eigenvalues of a Matrix">
+                        12. Graphical Visualization of Eigenvalues of a Matrix
+                    </option>
+
+                    <option value="13. Graphical Visualization of Eigenvectors of a Matrix">
+                        13. Graphical Visualization of Eigenvectors of a Matrix
+                    </option>
+
+                    <option value="14. Numerical Verification of Eigenvalue and Eigenvector Relationships">
+                        14. Numerical Verification of Eigenvalue and Eigenvector Relationships
+                    </option>
+
+                    <option value="15. Eigenvalue and Eigenvector Analysis for Multiple Square Matrices">
+                        15. Eigenvalue and Eigenvector Analysis for Multiple Square Matrices
+                    </option>
+
+                    <option value="16. Comparison of Eigenvalues Obtained Using Python and MATLAB">
+                        16. Comparison of Eigenvalues Obtained Using Python and MATLAB
+                    </option>
+
+                    <option value="17. Study of Eigenvalues for Matrices with Distinct Eigenvalues">
+                        17. Study of Eigenvalues for Matrices with Distinct Eigenvalues
+                    </option>
+
+                    <option value="18. Study of Eigenvalues for Matrices with Repeated Eigenvalues">
+                        18. Study of Eigenvalues for Matrices with Repeated Eigenvalues
+                    </option>
+
+                    <option value="19. Study of Complex Eigenvalues and Their Numerical Representation">
+                        19. Study of Complex Eigenvalues and Their Numerical Representation
+                    </option>
+
+                    <option value="20. Computational Analysis and Visualization of Eigenvalues and Eigenvectors">
+                        20. Computational Analysis and Visualization of Eigenvalues and Eigenvectors
+                    </option>
+
+                </optgroup>
+
+
+                <!-- UNIT II -->
+
+                <optgroup label="UNIT II — Algebraic and Transcendental Equations">
+
+                    <option value="21. Finding the Root of an Algebraic Equation Using Bisection Method">
+                        21. Finding the Root of an Algebraic Equation Using Bisection Method
+                    </option>
+
+                    <option value="22. Finding the Root of a Transcendental Equation Using Bisection Method">
+                        22. Finding the Root of a Transcendental Equation Using Bisection Method
+                    </option>
+
+                    <option value="23. Finding the Root of an Algebraic Equation Using Newton-Raphson Method">
+                        23. Finding the Root of an Algebraic Equation Using Newton-Raphson Method
+                    </option>
+
+                    <option value="24. Finding the Root of a Transcendental Equation Using Newton-Raphson Method">
+                        24. Finding the Root of a Transcendental Equation Using Newton-Raphson Method
+                    </option>
+
+                    <option value="25. Comparison of Bisection and Newton-Raphson Methods">
+                        25. Comparison of Bisection and Newton-Raphson Methods
+                    </option>
+
+                    <option value="26. Root Finding for a Polynomial Equation Using Bisection Method">
+                        26. Root Finding for a Polynomial Equation Using Bisection Method
+                    </option>
+
+                    <option value="27. Root Finding for a Polynomial Equation Using Newton-Raphson Method">
+                        27. Root Finding for a Polynomial Equation Using Newton-Raphson Method
+                    </option>
+
+                    <option value="28. Root Finding for a Trigonometric Equation Using Bisection Method">
+                        28. Root Finding for a Trigonometric Equation Using Bisection Method
+                    </option>
+
+                    <option value="29. Root Finding for a Trigonometric Equation Using Newton-Raphson Method">
+                        29. Root Finding for a Trigonometric Equation Using Newton-Raphson Method
+                    </option>
+
+                    <option value="30. Root Finding for an Exponential Equation Using Bisection Method">
+                        30. Root Finding for an Exponential Equation Using Bisection Method
+                    </option>
+
+                    <option value="31. Root Finding for an Exponential Equation Using Newton-Raphson Method">
+                        31. Root Finding for an Exponential Equation Using Newton-Raphson Method
+                    </option>
+
+                    <option value="32. Root Finding for a Logarithmic Equation Using Bisection Method">
+                        32. Root Finding for a Logarithmic Equation Using Bisection Method
+                    </option>
+
+                    <option value="33. Root Finding for a Logarithmic Equation Using Newton-Raphson Method">
+                        33. Root Finding for a Logarithmic Equation Using Newton-Raphson Method
+                    </option>
+
+                    <option value="34. Graphical Identification of Roots Before Applying Bisection Method">
+                        34. Graphical Identification of Roots Before Applying Bisection Method
+                    </option>
+
+                    <option value="35. Graphical Identification of Roots Before Applying Newton-Raphson Method">
+                        35. Graphical Identification of Roots Before Applying Newton-Raphson Method
+                    </option>
+
+                    <option value="36. Convergence Analysis of the Bisection Method">
+                        36. Convergence Analysis of the Bisection Method
+                    </option>
+
+                    <option value="37. Convergence Analysis of the Newton-Raphson Method">
+                        37. Convergence Analysis of the Newton-Raphson Method
+                    </option>
+
+                    <option value="38. Iteration-Based Error Analysis in the Bisection Method">
+                        38. Iteration-Based Error Analysis in the Bisection Method
+                    </option>
+
+                    <option value="39. Iteration-Based Error Analysis in the Newton-Raphson Method">
+                        39. Iteration-Based Error Analysis in the Newton-Raphson Method
+                    </option>
+
+                    <option value="40. Graphical and Numerical Analysis of Algebraic and Transcendental Equation Roots">
+                        40. Graphical and Numerical Analysis of Algebraic and Transcendental Equation Roots
+                    </option>
+
+                </optgroup>
+
+
+                <!-- UNIT III -->
+
+                <optgroup label="UNIT III — Linear System of Equations">
+
+                    <option value="41. Solving a 2×2 Linear System Using Jacobi's Iteration Method">
+                        41. Solving a 2×2 Linear System Using Jacobi's Iteration Method
+                    </option>
+
+                    <option value="42. Solving a 3×3 Linear System Using Jacobi's Iteration Method">
+                        42. Solving a 3×3 Linear System Using Jacobi's Iteration Method
+                    </option>
+
+                    <option value="43. Solving a 4×4 Linear System Using Jacobi's Iteration Method">
+                        43. Solving a 4×4 Linear System Using Jacobi's Iteration Method
+                    </option>
+
+                    <option value="44. Solving a 2×2 Linear System Using Gauss-Seidel Method">
+                        44. Solving a 2×2 Linear System Using Gauss-Seidel Method
+                    </option>
+
+                    <option value="45. Solving a 3×3 Linear System Using Gauss-Seidel Method">
+                        45. Solving a 3×3 Linear System Using Gauss-Seidel Method
+                    </option>
+
+                    <option value="46. Solving a 4×4 Linear System Using Gauss-Seidel Method">
+                        46. Solving a 4×4 Linear System Using Gauss-Seidel Method
+                    </option>
+
+                    <option value="47. Comparison of Jacobi and Gauss-Seidel Iteration Methods">
+                        47. Comparison of Jacobi and Gauss-Seidel Iteration Methods
+                    </option>
+
+                    <option value="48. Convergence Analysis of Jacobi's Iteration Method">
+                        48. Convergence Analysis of Jacobi's Iteration Method
+                    </option>
+
+                    <option value="49. Convergence Analysis of Gauss-Seidel Method">
+                        49. Convergence Analysis of Gauss-Seidel Method
+                    </option>
+
+                    <option value="50. Iteration Error Analysis Using Jacobi's Method">
+                        50. Iteration Error Analysis Using Jacobi's Method
+                    </option>
+
+                    <option value="51. Iteration Error Analysis Using Gauss-Seidel Method">
+                        51. Iteration Error Analysis Using Gauss-Seidel Method
+                    </option>
+
+                    <option value="52. Graphical Visualization of Jacobi Method Convergence">
+                        52. Graphical Visualization of Jacobi Method Convergence
+                    </option>
+
+                    <option value="53. Graphical Visualization of Gauss-Seidel Method Convergence">
+                        53. Graphical Visualization of Gauss-Seidel Method Convergence
+                    </option>
+
+                    <option value="54. Comparison of Iterations Required by Jacobi and Gauss-Seidel Methods">
+                        54. Comparison of Iterations Required by Jacobi and Gauss-Seidel Methods
+                    </option>
+
+                    <option value="55. Accuracy Analysis of Jacobi's Iterative Solution">
+                        55. Accuracy Analysis of Jacobi's Iterative Solution
+                    </option>
+
+                    <option value="56. Accuracy Analysis of Gauss-Seidel's Iterative Solution">
+                        56. Accuracy Analysis of Gauss-Seidel's Iterative Solution
+                    </option>
+
+                    <option value="57. Solution of Simultaneous Linear Equations Using Jacobi's Method in Python">
+                        57. Solution of Simultaneous Linear Equations Using Jacobi's Method in Python
+                    </option>
+
+                    <option value="58. Solution of Simultaneous Linear Equations Using Gauss-Seidel Method in Python">
+                        58. Solution of Simultaneous Linear Equations Using Gauss-Seidel Method in Python
+                    </option>
+
+                    <option value="59. Solution of Simultaneous Linear Equations Using Jacobi and Gauss-Seidel in MATLAB">
+                        59. Solution of Simultaneous Linear Equations Using Jacobi and Gauss-Seidel in MATLAB
+                    </option>
+
+                    <option value="60. Computational and Graphical Analysis of Iterative Methods for Linear Systems">
+                        60. Computational and Graphical Analysis of Iterative Methods for Linear Systems
+                    </option>
+
+                </optgroup>
+
+
+                <!-- UNIT IV -->
+
+                <optgroup label="UNIT IV — First-Order ODEs">
+
+                    <option value="61. Solution of a First-Order Exact Differential Equation">
+                        61. Solution of a First-Order Exact Differential Equation
+                    </option>
+
+                    <option value="62. Verification of a First-Order Exact Differential Equation">
+                        62. Verification of a First-Order Exact Differential Equation
+                    </option>
+
+                    <option value="63. Graphical Solution of a First-Order Exact Differential Equation">
+                        63. Graphical Solution of a First-Order Exact Differential Equation
+                    </option>
+
+                    <option value="64. Computational Analysis of Exact Differential Equations">
+                        64. Computational Analysis of Exact Differential Equations
+                    </option>
+
+                    <option value="65. Solution of a First-Order Non-Exact Differential Equation">
+                        65. Solution of a First-Order Non-Exact Differential Equation
+                    </option>
+
+                    <option value="66. Verification of a First-Order Non-Exact Differential Equation">
+                        66. Verification of a First-Order Non-Exact Differential Equation
+                    </option>
+
+                    <option value="67. Graphical Solution of a First-Order Non-Exact Differential Equation">
+                        67. Graphical Solution of a First-Order Non-Exact Differential Equation
+                    </option>
+
+                    <option value="68. Computational Analysis of Non-Exact Differential Equations">
+                        68. Computational Analysis of Non-Exact Differential Equations
+                    </option>
+
+                    <option value="69. Comparison of Exact and Non-Exact First-Order Differential Equations">
+                        69. Comparison of Exact and Non-Exact First-Order Differential Equations
+                    </option>
+
+                    <option value="70. Solution and Visualization of First-Order Exact Differential Equations">
+                        70. Solution and Visualization of First-Order Exact Differential Equations
+                    </option>
+
+                    <option value="71. Modeling Exponential Growth Using a First-Order Differential Equation">
+                        71. Modeling Exponential Growth Using a First-Order Differential Equation
+                    </option>
+
+                    <option value="72. Modeling Exponential Decay Using a First-Order Differential Equation">
+                        72. Modeling Exponential Decay Using a First-Order Differential Equation
+                    </option>
+
+                    <option value="73. Graphical Analysis of Exponential Growth">
+                        73. Graphical Analysis of Exponential Growth
+                    </option>
+
+                    <option value="74. Graphical Analysis of Exponential Decay">
+                        74. Graphical Analysis of Exponential Decay
+                    </option>
+
+                    <option value="75. Comparison of Exponential Growth and Exponential Decay Models">
+                        75. Comparison of Exponential Growth and Exponential Decay Models
+                    </option>
+
+                    <option value="76. Computational Solution of Exponential Growth Problems">
+                        76. Computational Solution of Exponential Growth Problems
+                    </option>
+
+                    <option value="77. Computational Solution of Exponential Decay Problems">
+                        77. Computational Solution of Exponential Decay Problems
+                    </option>
+
+                    <option value="78. Effect of Initial Conditions on Exponential Growth and Decay">
+                        78. Effect of Initial Conditions on Exponential Growth and Decay
+                    </option>
+
+                    <option value="79. Simulation of Exponential Growth and Decay Using Python/MATLAB">
+                        79. Simulation of Exponential Growth and Decay Using Python/MATLAB
+                    </option>
+
+                    <option value="80. Newton's Law of Cooling: Mathematical Modeling and Computational Solution">
+                        80. Newton's Law of Cooling: Mathematical Modeling and Computational Solution
+                    </option>
+
+                </optgroup>
+
+
+                <!-- UNIT V -->
+
+                <optgroup label="UNIT V — Higher-Order Linear Differential Equations with Constant Coefficients">
+
+                    <option value="81. Solution of a Second-Order Homogeneous Linear ODE">
+                        81. Solution of a Second-Order Homogeneous Linear ODE
+                    </option>
+
+                    <option value="82. Solution of a Third-Order Homogeneous Linear ODE">
+                        82. Solution of a Third-Order Homogeneous Linear ODE
+                    </option>
+
+                    <option value="83. Solution of a Higher-Order Homogeneous Linear ODE">
+                        83. Solution of a Higher-Order Homogeneous Linear ODE
+                    </option>
+
+                    <option value="84. Homogeneous ODE with Distinct Real Characteristic Roots">
+                        84. Homogeneous ODE with Distinct Real Characteristic Roots
+                    </option>
+
+                    <option value="85. Homogeneous ODE with Repeated Characteristic Roots">
+                        85. Homogeneous ODE with Repeated Characteristic Roots
+                    </option>
+
+                    <option value="86. Homogeneous ODE with Complex Characteristic Roots">
+                        86. Homogeneous ODE with Complex Characteristic Roots
+                    </option>
+
+                    <option value="87. Computational Solution of Homogeneous ODEs Using Python">
+                        87. Computational Solution of Homogeneous ODEs Using Python
+                    </option>
+
+                    <option value="88. Computational Solution of Homogeneous ODEs Using MATLAB">
+                        88. Computational Solution of Homogeneous ODEs Using MATLAB
+                    </option>
+
+                    <option value="89. Graphical Visualization of Homogeneous ODE Solutions">
+                        89. Graphical Visualization of Homogeneous ODE Solutions
+                    </option>
+
+                    <option value="90. Comparison of Homogeneous ODE Solutions for Different Characteristic Roots">
+                        90. Comparison of Homogeneous ODE Solutions for Different Characteristic Roots
+                    </option>
+
+                    <option value="91. Solution of a Second-Order Non-Homogeneous Linear ODE">
+                        91. Solution of a Second-Order Non-Homogeneous Linear ODE
+                    </option>
+
+                    <option value="92. Solution of a Third-Order Non-Homogeneous Linear ODE">
+                        92. Solution of a Third-Order Non-Homogeneous Linear ODE
+                    </option>
+
+                    <option value="93. Solution of a Higher-Order Non-Homogeneous Linear ODE">
+                        93. Solution of a Higher-Order Non-Homogeneous Linear ODE
+                    </option>
+
+                    <option value="94. Computational Solution of Non-Homogeneous ODEs Using Python">
+                        94. Computational Solution of Non-Homogeneous ODEs Using Python
+                    </option>
+
+                    <option value="95. Computational Solution of Non-Homogeneous ODEs Using MATLAB">
+                        95. Computational Solution of Non-Homogeneous ODEs Using MATLAB
+                    </option>
+
+                    <option value="96. Graphical Visualization of Non-Homogeneous ODE Solutions">
+                        96. Graphical Visualization of Non-Homogeneous ODE Solutions
+                    </option>
+
+                    <option value="97. Comparison of Homogeneous and Non-Homogeneous ODE Solutions">
+                        97. Comparison of Homogeneous and Non-Homogeneous ODE Solutions
+                    </option>
+
+                    <option value="98. Analysis of Higher-Order Linear ODEs with Constant Coefficients">
+                        98. Analysis of Higher-Order Linear ODEs with Constant Coefficients
+                    </option>
+
+                    <option value="99. Numerical and Graphical Analysis of Higher-Order Linear ODE Solutions">
+                        99. Numerical and Graphical Analysis of Higher-Order Linear ODE Solutions
+                    </option>
+
+                    <option value="100. Computational Solver for Homogeneous and Non-Homogeneous Linear ODEs with Constant Coefficients">
+                        100. Computational Solver for Homogeneous and Non-Homogeneous Linear ODEs with Constant Coefficients
+                    </option>
+
+                </optgroup>
+
+            </select>
+
+            <button type="submit" id="submitBtn">
+                Submit Topic
+            </button>
+
+        </form>
+
+        <div id="message" class="message"></div>
+
+        <div class="footer">
+            Computational Mathematics Lab | 25MA306BS
+        </div>
+
+    </div>
 
 </div>
 
 
 <script>
 
-    // CURRENT GOOGLE APPS SCRIPT WEB APP
-    const API_URL =
+    // ============================================================
+    // YOUR LATEST GOOGLE APPS SCRIPT WEB APP URL
+    // ============================================================
+
+    const SCRIPT_URL =
         "https://script.google.com/macros/s/AKfycbwcHdl9OWVzcdYUI_hPFi1FYgAIZ-rAQOSAB7UrwCgYtuYhZLujQ5rPNJGlLtMoWWf1oQ/exec";
 
 
     const form = document.getElementById("topicForm");
     const rollNoInput = document.getElementById("rollNo");
     const topicSelect = document.getElementById("topic");
-    const message = document.getElementById("message");
-    const button = document.getElementById("submitButton");
+    const submitBtn = document.getElementById("submitBtn");
+    const messageBox = document.getElementById("message");
+
+
+    function showMessage(text, type) {
+
+        messageBox.className = "message " + type;
+        messageBox.textContent = text;
+
+    }
 
 
     form.addEventListener("submit", async function(event) {
@@ -646,10 +701,10 @@
         const topic = topicSelect.value.trim();
 
 
-        if (!rollNo) {
+        if (rollNo === "") {
 
             showMessage(
-                "Please enter your Roll Number.",
+                "Please enter your Roll No.",
                 "error"
             );
 
@@ -657,7 +712,7 @@
         }
 
 
-        if (!topic) {
+        if (topic === "") {
 
             showMessage(
                 "Please select a topic.",
@@ -668,29 +723,33 @@
         }
 
 
-        button.disabled = true;
-        button.innerText = "Submitting...";
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Submitting...";
 
-        message.className = "";
-        message.innerText = "";
+
+        showMessage(
+            "Checking topic availability...",
+            "loading"
+        );
 
 
         try {
 
-            const response = await fetch(API_URL, {
+            const response = await fetch(
+                SCRIPT_URL,
+                {
+                    method: "POST",
 
-                method: "POST",
+                    headers: {
+                        "Content-Type": "text/plain;charset=utf-8"
+                    },
 
-                headers: {
-                    "Content-Type": "text/plain;charset=utf-8"
-                },
-
-                body: JSON.stringify({
-                    rollNo: rollNo,
-                    topic: topic
-                })
-
-            });
+                    body: JSON.stringify({
+                        rollNo: rollNo,
+                        topic: topic
+                    })
+                }
+            );
 
 
             const result = await response.json();
@@ -699,86 +758,81 @@
             if (result.success) {
 
                 showMessage(
-                    "✓ " + result.message,
+                    "Success! Your topic has been allocated successfully.\n\n" +
+                    "Roll No: " + rollNo + "\n" +
+                    "Topic: " + topic,
                     "success"
                 );
 
-                // Permanently disable this browser after successful submission
+
+                /*
+                 * Prevent the same browser from submitting again.
+                 * The Google Sheet remains the actual source of truth.
+                 */
+
                 localStorage.setItem(
                     "topicSubmitted",
                     "true"
                 );
 
-                localStorage.setItem(
-                    "submittedRollNo",
-                    rollNo
-                );
 
                 rollNoInput.disabled = true;
                 topicSelect.disabled = true;
-                button.disabled = true;
-                button.innerText = "Already Submitted";
+                submitBtn.disabled = true;
+                submitBtn.textContent = "Topic Allocated";
 
-            } else {
+            }
+
+            else {
 
                 showMessage(
-                    "✗ " + result.message,
+                    result.message ||
+                    "Unable to submit your topic.",
                     "error"
                 );
 
-                button.disabled = false;
-                button.innerText = "Submit Topic";
+                submitBtn.disabled = false;
+                submitBtn.textContent = "Submit Topic";
+
             }
 
+        }
 
-        } catch (error) {
+        catch (error) {
+
+            console.error(error);
 
             showMessage(
-                "Unable to connect to the allocation system. Please try again.",
+                "Unable to connect to the server. Please check your internet connection and try again.",
                 "error"
             );
 
-            button.disabled = false;
-            button.innerText = "Submit Topic";
+            submitBtn.disabled = false;
+            submitBtn.textContent = "Submit Topic";
+
         }
 
     });
 
 
-    function showMessage(text, type) {
+    /*
+     * If this browser already submitted a topic,
+     * don't allow another submission from this browser.
+     */
 
-        message.innerText = text;
-        message.className = type;
-        message.style.display = "block";
+    if (localStorage.getItem("topicSubmitted") === "true") {
+
+        rollNoInput.disabled = true;
+        topicSelect.disabled = true;
+        submitBtn.disabled = true;
+
+        showMessage(
+            "This browser has already submitted a topic. " +
+            "If you need to check your allocation, contact the coordinator.",
+            "error"
+        );
 
     }
-
-
-    // Check whether this browser already submitted
-    window.addEventListener("load", function() {
-
-        const alreadySubmitted =
-            localStorage.getItem("topicSubmitted");
-
-        if (alreadySubmitted === "true") {
-
-            const oldRoll =
-                localStorage.getItem("submittedRollNo");
-
-            rollNoInput.value = oldRoll || "";
-
-            rollNoInput.disabled = true;
-            topicSelect.disabled = true;
-            button.disabled = true;
-            button.innerText = "Already Submitted";
-
-            showMessage(
-                "⚠ You have already submitted your topic.",
-                "error"
-            );
-        }
-
-    });
 
 </script>
 
