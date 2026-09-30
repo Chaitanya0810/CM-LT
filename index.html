@@ -159,12 +159,11 @@
         <div class="layout">
             <section class="card form-card" aria-labelledby="form-title">
                 <h2 class="card-heading" id="form-title">Add your project</h2>
-                <p class="card-description">Register one team of 3 or 4 students with each member’s complete roll number.</p>
+                <p class="card-description">Register one team of 3 students with each member’s complete roll number.</p>
                 <form id="topicForm">
                     <label for="teamSize">Team size</label>
                     <select id="teamSize" name="teamSize" required>
                         <option value="3" selected>3 students</option>
-                        <option value="4">4 students</option>
                     </select>
                     <div id="memberFields"></div>
                     <label for="topic">Choose a project topic</label>
@@ -315,13 +314,13 @@
             "257R1A66K0", "257R1A66K1", "257R1A66K2",
             "267R5A6615", "267R5A6616", "267R5A6617", "267R5A6618", "267R5A6619", "267R5A6620", "267R5A6621", "267R5A6622"
         ];
-        const teamSizeInput = document.getElementById("teamSize");
+        const TEAM_SIZE = 3;
         const memberFields = document.getElementById("memberFields");
         const topicSelect = document.getElementById("topic");
 
         function renderMemberFields() {
             const previousRollNos = Array.from(memberFields.querySelectorAll("select"), select => select.value);
-            memberFields.innerHTML = Array.from({ length: Number(teamSizeInput.value) }, (_, index) => `
+            memberFields.innerHTML = Array.from({ length: TEAM_SIZE }, (_, index) => `
                 <label for="member-${index + 1}">Student ${index + 1} full roll number</label>
                 <select id="member-${index + 1}" name="member-${index + 1}" required>
                     <option value="">Select a roll number</option>
@@ -353,14 +352,13 @@
             }).join("");
         }
 
-        teamSizeInput.addEventListener("change", renderMemberFields);
         renderMemberFields();
         configureTopics();
 
         form.addEventListener("submit", async event => {
             event.preventDefault();
             const rollNos = Array.from(memberFields.querySelectorAll("select"), select => select.value);
-            const teamSize = Number(teamSizeInput.value);
+            const teamSize = TEAM_SIZE;
             const topic = document.getElementById("topic").value.trim();
             if (rollNos.length !== teamSize || new Set(rollNos).size !== teamSize || !topic) {
                 message.className = "error";
