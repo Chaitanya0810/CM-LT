@@ -305,15 +305,44 @@
             "Spring-Mass-Damper Simulation",
             "AI Error Correction & Convergence Simulator"
         ];
+        const ROLL_NUMBERS = [
+            "257R1A66C9", "257R1A66D0", "257R1A66D1", "257R1A66D2", "257R1A66D3", "257R1A66D4", "257R1A66D5", "257R1A66D6", "257R1A66D7", "257R1A66D8", "257R1A66D9",
+            "257R1A66E0", "257R1A66E1", "257R1A66E2", "257R1A66E3", "257R1A66E4", "257R1A66E5", "257R1A66E6", "257R1A66E7", "257R1A66E8", "257R1A66E9",
+            "257R1A66F0", "257R1A66F1", "257R1A66F2", "257R1A66F3", "257R1A66F4", "257R1A66F5", "257R1A66F6", "257R1A66F7", "257R1A66F8", "257R1A66F9",
+            "257R1A66G0", "257R1A66G1", "257R1A66G2", "257R1A66G3", "257R1A66G4", "257R1A66G5", "257R1A66G6", "257R1A66G7", "257R1A66G8", "257R1A66G9",
+            "257R1A66H0", "257R1A66H1", "257R1A66H2", "257R1A66H3", "257R1A66H4", "257R1A66H5", "257R1A66H6", "257R1A66H7", "257R1A66H8", "257R1A66H9",
+            "257R1A66J0", "257R1A66J1", "257R1A66J3", "257R1A66J4", "257R1A66J6", "257R1A66J7", "257R1A66J8", "257R1A66J9",
+            "257R1A66K0", "257R1A66K1", "257R1A66K2",
+            "267R5A6615", "267R5A6616", "267R5A6617", "267R5A6618", "267R5A6619", "267R5A6620", "267R5A6621", "267R5A6622"
+        ];
         const teamSizeInput = document.getElementById("teamSize");
         const memberFields = document.getElementById("memberFields");
         const topicSelect = document.getElementById("topic");
 
         function renderMemberFields() {
+            const previousRollNos = Array.from(memberFields.querySelectorAll("select"), select => select.value);
             memberFields.innerHTML = Array.from({ length: Number(teamSizeInput.value) }, (_, index) => `
                 <label for="member-${index + 1}">Student ${index + 1} full roll number</label>
-                <input type="text" id="member-${index + 1}" name="member-${index + 1}" placeholder="Enter your complete roll number" autocomplete="off" autocapitalize="characters" spellcheck="false" required maxlength="40">
+                <select id="member-${index + 1}" name="member-${index + 1}" required>
+                    <option value="">Select a roll number</option>
+                    ${ROLL_NUMBERS.map(rollNo => `<option value="${rollNo}">${rollNo}</option>`).join("")}
+                </select>
             `).join("");
+            const selects = Array.from(memberFields.querySelectorAll("select"));
+            selects.forEach((select, index) => {
+                if (previousRollNos[index] && ROLL_NUMBERS.includes(previousRollNos[index])) {
+                    select.value = previousRollNos[index];
+                }
+                select.addEventListener("change", renderMemberFields);
+            });
+            const selectedRollNos = selects.map(select => select.value).filter(Boolean);
+            selects.forEach(select => {
+                Array.from(select.options).forEach(option => {
+                    if (option.value && option.value !== select.value && selectedRollNos.includes(option.value)) {
+                        option.disabled = true;
+                    }
+                });
+            });
         }
 
         function configureTopics() {
@@ -330,12 +359,12 @@
 
         form.addEventListener("submit", async event => {
             event.preventDefault();
-            const rollNos = Array.from(memberFields.querySelectorAll("input"), input => input.value.trim().toUpperCase());
+            const rollNos = Array.from(memberFields.querySelectorAll("select"), select => select.value);
             const teamSize = Number(teamSizeInput.value);
             const topic = document.getElementById("topic").value.trim();
             if (rollNos.length !== teamSize || new Set(rollNos).size !== teamSize || !topic) {
                 message.className = "error";
-                message.textContent = "Enter a different complete roll number for every team member and choose an available topic.";
+                message.textContent = "Choose a different roll number from the roster for every team member and select an available topic.";
                 return;
             }
 
